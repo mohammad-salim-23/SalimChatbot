@@ -9,8 +9,9 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-
+  updateProfile,
 } from "firebase/auth";
+
 
 import app from "../../firebase/firebase.config";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
@@ -38,7 +39,9 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     return signOut(auth);
   };
-
+  const updateUserProfile = (profile) => {
+    return updateProfile(auth.currentUser, profile);
+  };
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -69,7 +72,7 @@ export const AuthProvider = ({ children }) => {
     signIn,
     googleSignIn,
     logOut,
-    
+    updateUserProfile,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
