@@ -22,8 +22,10 @@
     "match-sorter": "^8.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-helmet": "^6.1.0",
     "react-router-dom": "^7.4.0",
     "sort-by": "^1.2.0",
+    "sweetalert2": "^11.17.2",
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7"
   },
