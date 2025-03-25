@@ -20,21 +20,11 @@ const Navbar = () => {
           SalimChatbot
         </h1>
 
-        {/* Search Bar */}
-        <div className="max-w-md flex-grow relative">
-          <input
-            type="text"
-            placeholder="Search for products"
-            className="w-full border border-gray-300 rounded-full py-2 px-5 pr-10"
-          />
-          <Search className="absolute right-3 top-2.5 text-gray-500" size={20} />
-        </div>
+        
 
         {/* Navigation */}
         <nav className="flex gap-4 items-center">
-          <Button variant="outline" className="rounded-full p-0 size-10">
-            🔔
-          </Button>
+         
 
           {/* Avatar with Dropdown */}
           <DropdownMenu>

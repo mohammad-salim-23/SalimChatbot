@@ -42,12 +42,12 @@ const HomePage = () => {
       <h1 className="text-4xl font-bold mb-6 text-teal-400 drop-shadow-lg">Salim Chatbot 🤖</h1>
       <div className="w-full max-w-lg bg-gray-800 rounded-xl p-6 shadow-2xl border border-gray-700">
         {/* Image Section */}
-        <div className="flex justify-center mb-4">
+        <div className="flex justify-center ">
           <img className="h-60 w-60 object-cover rounded-full shadow-lg border-4 border-teal-500" src={aiImg} alt="AI Chatbot" />
         </div>
 
         {/* Chat Messages */}
-        <div className="h-72 overflow-y-auto border-b border-gray-600 pb-4 space-y-3">
+        <div className="h-74 overflow-y-auto border-b border-gray-600 pb-4 space-y-3">
           {messages.map((msg, index) => (
             <div
               key={index}
@@ -64,7 +64,7 @@ const HomePage = () => {
         </div>
 
         {/* Input Section */}
-        <div className="mt-4 flex gap-2">
+        <div className="mt-4 flex gap-2 sticky  bottom-0 bg-gray-900 z-10 p-4">
           <input
             type="text"
             value={input}
