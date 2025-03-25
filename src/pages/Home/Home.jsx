@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
 import axios from "axios";
+import aiImg from "../../assets/images/AIChatbot.jpg";
 
 const HomePage = () => {
   const [messages, setMessages] = useState([]);
@@ -12,7 +13,7 @@ const HomePage = () => {
     if (!input.trim()) return;
 
     const userMessage = { role: "user", content: input };
-    setMessages([...messages, userMessage]);
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
     setInput("");
 
     try {
@@ -27,32 +28,56 @@ const HomePage = () => {
         }
       );
       const aiMessage = response.data.choices[0].message;
-      setMessages([...messages, userMessage, aiMessage]);
+      setMessages((prevMessages) => [...prevMessages, aiMessage]);
     } catch (error) {
-      setMessages([...messages, userMessage, { role: "AI", content: "⚠️ API Error!" }]);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { role: "AI", content: "⚠️ API Error!" },
+      ]);
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-900 text-white py-10">
-      <h1 className="text-3xl font-bold mb-5">Salim Chatbot 🤖</h1>
-      <div className="w-full max-w-lg bg-gray-800 rounded-lg p-5 shadow-lg">
-        <div className="h-80 overflow-y-auto border-b border-gray-600 pb-4">
+    <div className="min-h-screen flex flex-col items-center bg-gray-900 text-white py-10 px-4">
+      <h1 className="text-4xl font-bold mb-6 text-teal-400 drop-shadow-lg">Salim Chatbot 🤖</h1>
+      <div className="w-full max-w-lg bg-gray-800 rounded-xl p-6 shadow-2xl border border-gray-700">
+        {/* Image Section */}
+        <div className="flex justify-center mb-4">
+          <img className="h-60 w-60 object-cover rounded-full shadow-lg border-4 border-teal-500" src={aiImg} alt="AI Chatbot" />
+        </div>
+
+        {/* Chat Messages */}
+        <div className="h-72 overflow-y-auto border-b border-gray-600 pb-4 space-y-3">
           {messages.map((msg, index) => (
-            <div key={index} className={`my-2 p-2 rounded ${msg.role === "user" ? "bg-blue-500 ml-auto" : "bg-gray-700"}`}> 
-              <strong>{msg.role === "user" ? "You" : "AI"}:</strong> {msg.content}
+            <div
+              key={index}
+              className={`p-3 rounded-lg text-sm max-w-[80%] ${
+                msg.role === "user"
+                  ? "bg-teal-500 ml-auto text-white shadow-lg"
+                  : "bg-gray-700 text-gray-200"
+              }`}
+            >
+              <strong className="block text-xs mb-1 opacity-75">{msg.role === "user" ? "You" : "AI"}:</strong>
+              {msg.content}
             </div>
           ))}
         </div>
-        <div className="mt-4 flex">
+
+        {/* Input Section */}
+        <div className="mt-4 flex gap-2">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask anything..."
-            className="flex-grow p-2 text-black rounded-l-md"
+            className="flex-grow p-3 text-black rounded-md bg-gray-200 outline-none focus:ring-2 focus:ring-green-400"
           />
-          <button onClick={sendMessage} className="bg-green-500 px-4 py-2 rounded-r-md">Send ➤</button>
+          <button
+            onClick={sendMessage}
+            className="bg-green-500 hover:bg-green-600 px-4 py-3 rounded-md text-white font-semibold shadow-md transition-all"
+          >
+            Send ➤
+          </button>
         </div>
       </div>
     </div>
